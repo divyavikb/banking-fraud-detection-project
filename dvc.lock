@@ -1,0 +1,139 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/data/data_ingestion.py
+    deps:
+    - path: src/data/data_ingestion.py
+      hash: md5
+      md5: d1d2db0bc88d34bec1e4bf899c3d8f22
+      size: 1862
+    outs:
+    - path: data/raw
+      hash: md5
+      md5: b93a463693d40fd527602abf41320451.dir
+      size: 125396664
+      nfiles: 1
+  data_validation:
+    cmd: python src/data/data_validation.py
+    deps:
+    - path: data/raw/fraud_data_raw.csv
+      hash: md5
+      md5: 0cfe65030440b46b906c10da23f4382b
+      size: 125396664
+    - path: src/data/data_validation.py
+      hash: md5
+      md5: ae24ab3ce89a78cee42592bd8c4aa667
+      size: 8840
+    outs:
+    - path: reports/validation_report.json
+      hash: md5
+      md5: e8eb41caa4c0176dbf1718b84da7f3cb
+      size: 228
+  feature_extraction:
+    cmd: python src/features/feature_extraction.py
+    deps:
+    - path: data/raw/fraud_data_raw.csv
+      hash: md5
+      md5: 0cfe65030440b46b906c10da23f4382b
+      size: 125396664
+    - path: src/features/feature_extraction.py
+      hash: md5
+      md5: 7af0057d207934f7a5015330c023c627
+      size: 2902
+    outs:
+    - path: data/processed/features_engineered.csv
+      hash: md5
+      md5: c6d489788eaa8a84a4f0eaf11c5d9ef1
+      size: 136005256
+  model_training:
+    cmd: python src/models/train.py
+    deps:
+    - path: data/processed/features_engineered.csv
+      hash: md5
+      md5: c6d489788eaa8a84a4f0eaf11c5d9ef1
+      size: 136005256
+    - path: src/models/train.py
+      hash: md5
+      md5: f6b71baa6d241ad93e5728180db390df
+      size: 6399
+    params:
+      params.yaml:
+        model_training.test_size: 0.2
+    outs:
+    - path: data/final/test.csv
+      hash: md5
+      md5: 2d0ad1f47cc15bc92c2a2a79106ebcb1
+      size: 5662814
+    - path: data/final/train.csv
+      hash: md5
+      md5: c3cc96bc6b77b538d3be9f7640e9e643
+      size: 33700640
+    - path: models/model.joblib
+      hash: md5
+      md5: afd2fc9047189624e81417e81f7c574c
+      size: 357908
+    - path: models/scaler.joblib
+      hash: md5
+      md5: d29145ee2908ae0c2b1623e4a3211a60
+      size: 4062
+  model_tuning:
+    cmd: python src/models/hyperparameter_tuning.py
+    deps:
+    - path: data/final/train.csv
+      hash: md5
+      md5: c3cc96bc6b77b538d3be9f7640e9e643
+      size: 33700640
+    - path: src/models/hyperparameter_tuning.py
+      hash: md5
+      md5: 11c5c231e62441a0a7c0daebde903a71
+      size: 8416
+    outs:
+    - path: models/best_model_tuned.joblib
+      hash: md5
+      md5: 0867590f1eb04202dece5fc100b5a644
+      size: 95815
+  model_evaluation:
+    cmd: python src/models/model_evaluate.py
+    deps:
+    - path: data/final/test.csv
+      hash: md5
+      md5: 2d0ad1f47cc15bc92c2a2a79106ebcb1
+      size: 5662814
+    - path: models/best_model_tuned.joblib
+      hash: md5
+      md5: 0867590f1eb04202dece5fc100b5a644
+      size: 95815
+    - path: models/scaler.joblib
+      hash: md5
+      md5: d29145ee2908ae0c2b1623e4a3211a60
+      size: 4062
+    - path: src/models/model_evaluate.py
+      hash: md5
+      md5: 146efa6e2e6e22002cb0a938953cf70e
+      size: 9684
+    outs:
+    - path: data/processed/predictions.csv
+      hash: md5
+      md5: 8cb38dcb7445558173973e8e41ab993f
+      size: 3355489
+    - path: reports/evaluation_report.txt
+      hash: md5
+      md5: 36eb2d683aafa0b4dffc03f60861fccf
+      size: 3677
+  data_visualization:
+    cmd: python src/visualization/data_visualization.py
+    deps:
+    - path: data/raw/fraud_data_raw.csv
+      hash: md5
+      md5: 0cfe65030440b46b906c10da23f4382b
+      size: 125396664
+    - path: src/visualization/data_visualization.py
+      hash: md5
+      md5: 372eb0a184876bcc3d08b42aba6b5362
+      size: 14060
+    outs:
+    - path: reports/figures
+      hash: md5
+      md5: 53618b4fd578524f70fb9a1af035882c.dir
+      size: 1897452
+      nfiles: 7

@@ -1,0 +1,129 @@
+data
+models
+reports
+
+
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# pyenv
+.python-version
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Data files (keep structure, ignore data)
+data/raw/*.csv
+data/raw/*.data
+data/interim/*.csv
+data/processed/*.csv
+!data/processed/feature_artifacts.pkl
+
+# Models (large files)
+models/*.pkl
+models/*.h5
+models/*.pt
+models/*.onnx
+*.joblib
+
+# Logs
+*.log
+logs/
+
+# Reports (generated)
+reports/*.html
+reports/figures/*.png
+reports/figures/*.pdf
+
+# AWS
+.aws/
+*.pem
+
+# Terraform
+infrastructure/terraform/.terraform/
+infrastructure/terraform/*.tfstate
+infrastructure/terraform/*.tfstate.backup
+infrastructure/terraform/.terraform.lock.hcl
+
+# Docker
+*.dockerignore
+
+# Temporary files
+*.tmp
+*.bak
+tmp/
+temp/
+
+# Documentation build
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Deployment artifacts
+deployment_artifacts/
+endpoint_info.json
+/reports
