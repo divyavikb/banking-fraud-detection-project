@@ -54,7 +54,7 @@ stages:
       size: 136005256
     - path: src/models/train.py
       hash: md5
-      md5: f6b71baa6d241ad93e5728180db390df
+      md5: 9e2569057ce8e3bfb629542d817832ca
       size: 6399
     params:
       params.yaml:
@@ -62,26 +62,26 @@ stages:
     outs:
     - path: data/final/test.csv
       hash: md5
-      md5: 2d0ad1f47cc15bc92c2a2a79106ebcb1
+      md5: c299e3a9d2259a64f6e5bab10423ceb6
       size: 5662814
     - path: data/final/train.csv
       hash: md5
-      md5: c3cc96bc6b77b538d3be9f7640e9e643
+      md5: 96656a82a7c2e6b12b23a6336f663fa3
       size: 33700640
     - path: models/model.joblib
       hash: md5
-      md5: afd2fc9047189624e81417e81f7c574c
-      size: 357908
+      md5: 252cb3bd8dc82d706bbc6f28700edccb
+      size: 429230
     - path: models/scaler.joblib
       hash: md5
-      md5: d29145ee2908ae0c2b1623e4a3211a60
-      size: 4062
+      md5: 34dc7513c34425df2686e98f60e57430
+      size: 3790
   model_tuning:
     cmd: python src/models/hyperparameter_tuning.py
     deps:
     - path: data/final/train.csv
       hash: md5
-      md5: c3cc96bc6b77b538d3be9f7640e9e643
+      md5: 96656a82a7c2e6b12b23a6336f663fa3
       size: 33700640
     - path: src/models/hyperparameter_tuning.py
       hash: md5
@@ -90,23 +90,23 @@ stages:
     outs:
     - path: models/best_model_tuned.joblib
       hash: md5
-      md5: d02a53577bec3de1670ea0e9de51dd60
-      size: 46734
+      md5: e075b3e19328dec28e3a238bcc18140f
+      size: 79913
   model_evaluation:
     cmd: python src/models/model_evaluate.py
     deps:
     - path: data/final/test.csv
       hash: md5
-      md5: 2d0ad1f47cc15bc92c2a2a79106ebcb1
+      md5: c299e3a9d2259a64f6e5bab10423ceb6
       size: 5662814
     - path: models/best_model_tuned.joblib
       hash: md5
-      md5: d02a53577bec3de1670ea0e9de51dd60
-      size: 46734
+      md5: e075b3e19328dec28e3a238bcc18140f
+      size: 79913
     - path: models/scaler.joblib
       hash: md5
-      md5: d29145ee2908ae0c2b1623e4a3211a60
-      size: 4062
+      md5: 34dc7513c34425df2686e98f60e57430
+      size: 3790
     - path: src/models/model_evaluate.py
       hash: md5
       md5: 146efa6e2e6e22002cb0a938953cf70e
@@ -114,11 +114,11 @@ stages:
     outs:
     - path: data/processed/predictions.csv
       hash: md5
-      md5: 32ae9bb351f7dc315785ababdb6e5d9b
+      md5: af70d434904421620b95428b4cc868f9
       size: 3355489
     - path: reports/evaluation_report.txt
       hash: md5
-      md5: b754bb5fb75eb511b669d017c202cce5
+      md5: 1cbb72d39e8baf2731d8bedfb685eabf
       size: 3677
   data_visualization:
     cmd: python src/visualization/data_visualization.py

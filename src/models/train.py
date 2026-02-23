@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
     # Train/test split
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, random_state=42, stratify=y
+        X, y, test_size=test_size, random_state=34, stratify=y
     )
     logger.info(f"Train size: {len(X_train)}, Test size: {len(X_test)}")
 
